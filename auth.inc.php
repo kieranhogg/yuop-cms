@@ -1,32 +1,44 @@
 <?php
 
-//FIXME make this not suck
-
+require 'class/Auth.class.php';
+require_once 'tbs/tbs_class.php';
 session_start();
-require 'config.inc.php';
-$authorized = false;
 
-if(isset($_GET['logout']) && ($_SESSION['auth'])) {
-    $_SESSION['auth'] = null;
-    session_destroy();
-    echo "logging out...";
+if (isset($_POST['username'])) {
+    $user = $_POST['username'];
 }
 
-if(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
-    // TODO wtf is this?
-    $user = 'face';
-    $pass = 'face';
-    if (($user == $_SERVER['PHP_AUTH_USER']) && ($pass == ($_SERVER['PHP_AUTH_PW'])) && (!empty($_SESSION['auth']))) {
-        $authorized = true;
+if (isset($_POST['password'])) {
+    $pass = $_POST['password'];
+}
+
+if (!isset($require_login)) {
+    $require_login = false;
+}
+
+//logout
+if(isset($_GET['logout']) && (isset($_SESSION['auth']))) {
+    echo 'logging out';
+    $_SESSION['auth'] = null;
+    $auth->destroy();
+}
+elseif ($require_login && $_SESSION['auth'] !== true) {
+    if (isset($user) && isset($pass)) {
+        $auth = new Auth($user, $pass, $db);
+        if (!$auth->isAuth()) {
+            $page_title = 'Error | ' . SITE_TITLE;
+            $error_text = 'Login failed, check your details';
+            $tbs = new clsTinyButStrong;
+            $tbs->LoadTemplate('error.html');
+            $tbs->Show();
+            exit;
+        }
+    }
+    else {
+        $page_title = 'Login | ' . SITE_TITLE;
+        $tbs = new clsTinyButStrong;
+        $tbs->LoadTemplate('login.html');
+        $tbs->Show(); 
     }
 }
-
-if (!$authorized) {
-    header('WWW-Authenticate: Basic Realm="Login please"');
-    header('HTTP/1.0 401 Unauthorized');
-    $_SESSION['auth'] = true;
-    print('Login now or forever hold your clicks...');
-    exit;
-}
-
 ?>
