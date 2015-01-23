@@ -1,0 +1,2 @@
+RewriteEngine on
+RewriteRule ^(.*).html$ index.php?title=$1 [L,QSA]

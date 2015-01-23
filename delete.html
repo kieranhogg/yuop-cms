@@ -1,0 +1,14 @@
+[onload;file='header.html';subtpl;getbody]
+<div class="post-header">
+<h2>Delete Page</h2>
+</div>
+<div class="entry clear">
+    <form action ="[onshow..script_name]" method="post">
+        <p>Really delete page '[onload.title]'?</p>
+        <p>
+            <input type="hidden" id="title" name="title" value="[onload.title]" />
+            <input type="submit" id="submit" name="submit" value="Delete" />
+        </p>
+    </form>
+</div>
+[onload;file='footer.html';subtpl;getbody]

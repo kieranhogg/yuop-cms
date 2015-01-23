@@ -1,0 +1,18 @@
+[onload;file='header.html';subtpl;getbody]
+<div class="post-header">
+    <h1>Items</h1>
+</div>
+<div class="entry clear">
+    <p>Static pages that aren't suitable for <a href='../blog'>my blog</a>. The <a href='yuop-cms.html'>CMS software</a> is a work in progress which will be finished at some point.</p>
+    <h2>[row.Cat_name;block=h2;headergrp=Cat_name]</h2>
+    <ul>
+        <li>
+        <a href='[row.Title;block=li].html' title='[row.Date]'>
+            [row.Title_text]
+        </a>
+        </li>
+    </ul>
+    <hr />
+<p><a href="post.php">Add new page</a></p>
+</div>
+[onload;file='footer.html';subtpl;getbody]

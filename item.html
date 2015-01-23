@@ -1,0 +1,26 @@
+[onload;file='header.html';subtpl;getbody]
+    <div class="post">
+        <div class="meta">
+            <div class="author">
+                <small>
+                <a href="./">Home</a> <span>&gt;</span> 
+                <a href="./[onshow.~category_lower]">[onshow.~category]</a> 
+                <span>&gt;</span>   
+                <span>[onshow.~title_text]</span>
+                </small>
+            </div>
+        </div>
+        <div class="post-header">
+            <h2>
+                [onshow.~title_text]
+            </h2> 
+        </div>
+        <div class="entry clear">
+            [onshow.~body;htmlconv=no]
+            <p>
+            <a href="edit.php?title=[onshow.~title]">Edit</a> | <a href="delete.php?title=[onshow.~title]">Delete</a>
+            </p>
+        </div>
+    </div>
+</div>
+[onload;file='footer.html';subtpl;getbody]
