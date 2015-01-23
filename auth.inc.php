@@ -13,6 +13,7 @@ if(isset($_GET['logout']) && ($_SESSION['auth'])) {
 }
 
 if(isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW'])) {
+    // TODO wtf is this?
     $user = 'face';
     $pass = 'face';
     if (($user == $_SERVER['PHP_AUTH_USER']) && ($pass == ($_SERVER['PHP_AUTH_PW'])) && (!empty($_SESSION['auth']))) {
